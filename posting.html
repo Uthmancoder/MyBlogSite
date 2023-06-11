@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link rel="stylesheet" href="../icofont/icofont.min.css" />
+  </head>
+  <style>
+    @-webkit-keyframes color-change-3x {
+      0% {
+        background: #1e2e2f;
+      }
+      50% {
+        background: #201824;
+      }
+      100% {
+        background: #3e2b2b;
+      }
+    }
+
+    @keyframes color-change-3x {
+      0% {
+        background: #1e2e2f;
+      }
+      50% {
+        background: #201824;
+      }
+      100% {
+        background: #3e2b2b;
+      }
+    }
+
+    .color-change-3x {
+      -webkit-animation: color-change-3x 4s linear infinite alternate both;
+      animation: color-change-3x 4s linear infinite alternate both;
+      width: 100%;
+      height: 100vh;
+    }
+    .form {
+      background-color: rgba(128, 124, 124, 0.2);
+    }
+
+    .welc {
+      width: 50%;
+      overflow-wrap: break-word;
+    }
+
+    main {
+      /* background-color: whitesmoke; */
+      text-align: center;
+    }
+
+    textarea {
+      text-align: center;
+      outline: none;
+      padding: 10px;
+    }
+
+    #screen {
+      display: none;
+      width: 100%;
+      font-size: 20px;
+    }
+    .cent {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid gray;
+    }
+
+    .image {
+      width: 100%;
+      height: 140px;
+      display: none;
+    }
+
+    .choosefile {
+      width: 100px;
+      background-color: black;
+      color: white;
+    }
+    .choseimg {
+      width: 100%;
+      height: 150px;
+      display: none;
+    }
+    textarea,
+    input {
+      background-color: transparent;
+      color: white;
+      border: 5px inset;
+    }
+    .hunmd {
+      /* border: 4px inset; */
+    }
+    @media (max-width: 800px) {
+      .hunmd {
+        width: 100%;
+        margin-left: 5%;
+      }
+      .choseimg {
+        width: 100%;
+        margin-left: 5%;
+      }
+      .hunmd {
+        display: block;
+      }
+      .opening {
+        margin-left: 5%;
+      }
+      .postbtn {
+        width: 120px;
+      }
+    }
+    ::placeholder {
+    }
+  </style>
+
+  <body>
+    <section class="color-change-3x p-3">
+      <h1 class="welc" id="screen"></h1>
+      <main class="container">
+        <h1 class="text-light fw-bolder">Post a blog</h1>
+        <div class="w-75 mx-auto d-grid form p-4 rounded-3 shadow text-center">
+          <textarea
+            class="my-2 w-100"
+            name="headline"
+            id="head"
+            cols="30"
+            rows="1"
+            placeholder="Headline"
+          ></textarea>
+          <div class="row my-2 w-100">
+            <div class="col-12 col-md-12 col-lg-6">
+              <textarea
+                class="w-100 opening"
+                name="opening"
+                id="opening"
+                cols="50"
+                rows="5"
+                placeholder="Opening"
+              ></textarea>
+            </div>
+            <div class="col-12 hunmd col-md-12 col-lg-6">
+              <div class="cent w-100 h-100">
+                <input
+                  type="file"
+                  onchange="pickfile(event)"
+                  id="filetoselect"
+                  class="choosefile"
+                />
+                <img class="img-fluid choseimg" src="" id="img" alt="" />
+              </div>
+            </div>
+          </div>
+          <textarea
+            name="content"
+            id="content"
+            cols="30"
+            rows="5"
+            placeholder="Post Content"
+          ></textarea>
+          <button class="btn btn-secondary rounded-5 postbtn my-2 w-25 mx-auto">
+            Post
+          </button>
+        </div>
+      </main>
+    </section>
+  </body>
+</html>
+<script>
+  let header = document.getElementById("head");
+  let opening = document.getElementById("opening");
+  let postcontent = document.getElementById("content");
+  let button = document.querySelector(".btn");
+  let postArray = JSON.parse(localStorage.getItem("post"));
+  let getuser = JSON.parse(localStorage.getItem("username"));
+  let screen = document.getElementById("screen");
+  console.log(postArray);
+
+  document.getElementById(
+    "screen"
+  ).innerHTML = `Hey ${getuser} welcome to uthman's blog`;
+  if (postArray == null) {
+    postArray = [];
+  }
+
+  let reader = new FileReader();
+  let postimge = document.getElementById("img");
+  let imagechosen = document.querySelector(".choseimg");
+  function pickfile(ev) {
+    let file = ev.target.files[0];
+    console.log(file);
+    reader.onload = (event) => {
+      let imageData = event.target.result;
+      postimge.src = imageData;
+      document.getElementById("filetoselect").style.display = "none";
+      imagechosen.style.display = "block";
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
+  button.addEventListener("click", function () {
+    if (!header.value || !opening.value || !postcontent.value || !postimge.src) {
+      alert("input fields can not be empty");
+    } else {
+      postArray.push({
+        header: header.value,
+        opening: opening.value,
+        postcontent: postcontent.value,
+        imageposted: postimge.src,
+      });
+      alert("post updated successfully");
+      window.location.href = "showpost.html";
+      localStorage.setItem("post", JSON.stringify(postArray));
+      console.log(postArray);
+    }
+  });
+</script>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" href="../icofont/icofont.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+<style>
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .navv {
+    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+  }
+
+  a:hover {
+    border-bottom: 2px solid rgb(176, 7, 7);
+  }
+
+  .imgt {
+    width: 100%;
+    height: 400px;
+  }
+  .carousel{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-image: url(data:image/jpeg;base64,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);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .text {
+    width: 70%;
+  }
+
+  .image-div {
+    width: 30%;
+    height: 100%;
+  }
+
+  .likebtn,
+  .commentbtn {
+    width: fit-content;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: rgb(103, 96, 96);
+  }
+
+  .commentarea {
+    background-color: whitesmoke;
+    border: none;
+    outline-color: transparent;
+    width: 100%;
+  }
+
+  .send {
+    width: 30px;
+    height: 28px;
+    padding: 0 5px;
+  }
+
+  .commentsection {
+    display: none;
+  }
+
+  @media (max-width :800px) {
+    .image-div {
+      width: 100%;
+    }
+  }
+
+  .postcon {
+    position: relative;
+  }
+
+  .deletbtn {
+    position: absolute;
+    bottom: 0;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: none;
+    text-align: center;
+    right: 1%;
+    height: 40px;
+    color: grey;
+    outline: none;
+  }
+
+  .edit {
+    position: absolute;
+    bottom: 0;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: none;
+    text-align: center;
+    right: 4%;
+    height: 40px;
+    color: grey;
+    outline: none;
+  }
+
+  .edit:hover {
+    color: black;
+  }
+
+  .deletbtn:hover {
+    color: red;
+  }
+
+  .comdiv {
+    position: relative
+  }
+
+  .dropleft {
+    width: 200px;
+    height: 50vh;
+    background: rgb(49, 49, 49);
+    position: absolute;
+    z-index: 1;
+    top: 9%;
+    margin-left: 5px;
+    display: inline-block;
+    animation: backInLeft;
+    animation-duration: 2s;
+    display: none;
+  }
+
+  .notice {
+    position: absolute;
+    top: -3px;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    color: white;
+    display: none;
+  }
+
+  #textcontents {
+    border: none;
+    outline: none;
+  }
+  .postcontent{
+    max-width: 90%;
+    overflow-wrap: break-word;
+  }
+  .claim{
+    font-size: 65px;
+  }
+
+  @media (max-width: 900px) {
+    .postcon {
+      width: 100%;
+      display: block;
+    }
+    .claim{
+      font-size: 50px;
+    }
+
+    #textcontents {
+      width: 100%;
+    }
+
+    .image-div {
+      width: 100%;
+    }
+
+    .postcon {
+      width: 90%;
+      margin: auto;
+    }
+  }
+
+  .more {
+    border: none;
+    background: none;
+    color: whitesmoke;
+    position: absolute;
+    left: 1%;
+    display: none;
+  }
+  @media (max-width:500px) {
+    #nav {
+        background-color: transparent;
+        width: 100%;
+        position: sticky;
+        height: 90px;
+        top: 0;
+        position: relative;
+    }
+    .claim{
+      font-size: 30px;
+    }
+    .more{
+      position: absolute;
+      left: 88%;
+      display : block;
+    }
+    .logo{
+      /* position: absolute; */
+      margin-left: -50%;
+    }
+  }
+  @media (max-width: 767px) {
+      /* Styles for screens smaller than 768px (e.g., mobile devices) */
+      .logo {
+        font-size: 1.5rem;
+      }
+      .linka {
+        display: none;
+      }
+      .d-md-block {
+        display: block;
+      }
+      .more{
+      position: absolute;
+      left: 88%;
+      display : block;
+    }
+    }
+
+    @media (min-width: 768px) {
+      /* Styles for screens larger than or equal to 768px (e.g., tablets and desktops) */
+      .logo {
+        font-size: 2rem;
+      }
+      .linka {
+        display: flex;
+      }
+      .d-md-block {
+        display: none;
+      }
+  
+    }
+</style>
+
+<body>
+  <nav class="w-100 bg-dark p-2 d-flex align-items-center justify-content-around navv">
+    <button id="more" class="more">
+      <span class="material-symbols-outlined">
+        dehaze
+      </span>
+    </button>
+    <div id="logo" class="logo text-light fs-4 fw-bolder">Uthman's <span class="text-danger">Blog</span></div>
+    <div class="linka d-none d-md-block">
+      <a class="mx-2" href="updated blog.html">Home</a>
+      <a class="mx-2" href="about.html">About</a>
+      <a class="mx-2" href="#">Contacts</a>
+    </div>
+    <div class="d-flex align-items-center d-none d-md-block">
+      <button id="postblog" class="btn btn-light mx-auto ">Post a blog</button>
+      <!-- <button class="bttn bg-primary text-light fs-5 rounded-circle px-2 py-1 border-0"><i
+          class="fa-brands fa-facebook"></i></button>
+      <button class="bttn bg-dark text-light mx-2  border-0"><i class="fa-brands fs-3 fa-github"></i></button>
+      <button class="bttn rounded-circle bg-danger px-2 py-1 mx-2 fs-5 text-light border-0 "><i
+          class="fa-brands fa-youtube"></i></button> -->
+    </div>
+
+  </nav>
+  <main>
+    <div class="imgt">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active text-center">
+            <h1 class="shadow p-5  mx-auto claim fw-bolder text-light w-75 text-center">Work  hard in silence 😥 let your success be your noice 💘💘 </h1>
+          </div>
+          <div class="carousel-item">
+                 <h1 class="shadow mx-auto  p-5 claim fw-bolder text-light w-75 text-center">Show your feelings by creating a post 🥰🥰</h1>
+          </div>
+          <div class="carousel-item">
+                 <h1 class="shadow mx-auto p-5 claim fw-bolder text-light w-75 text-center">Work as hard as you can to achieve what you want 🔞🔞</h1>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="dropleft shadow rounded-1 p-3">
+    <button>likedpost</button>
+    <button>comments</button>
+    </div>
+
+    <div id="showscreen">
+    </div>
+  </main>
+   <hr>
+  <footer>
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-6 col-sm-3 col-md-3 d-grid">
+          <p class="fs-5 fw-bolder">EMAIL</p>
+          <small>Email Caeigns</small>
+          <small>Transactional Emails</small>
+          <small>Drag and Drop Editor</small>
+          <small>Subscrition Forms</small>
+          <small>Automation</small>
+          <small>Camsmallaign Analytics</small>
+          <small>Free Email Temlates</small>
+          <small>Free Chrome Extension</small>
+        </div>
+        <div class="col-6 col-sm-3 col-md-3 d-grid">
+          <p class="fs-5 fw-bolder">CHATBOTS</p>
+          <small>Chatbot Builder</small>
+          <small>Instagram Chatbots</small>
+          <small>WhatsApp Chatbots</small>
+          <small>WhatsApp Business API </small>
+          <small>Viber Chatbots</small>
+          <small>Facebook Chatbots</small>
+          <small>Telegram Chatbots</small>
+          <small>Chatbot Signup Widgets</small>
+        </div>
+        <div class="col-6 col-sm-3 col-md-3 d-grid">
+          <p class="fs-5 fw-bolder">CHATBOTS</p>
+          <small>Course Creator</small>
+          <small>CRM</small>
+          <small>Landing Pages</small>
+          <small>Bio Link Page</small>
+          <small>SMS</small>
+          <small>Viber</small>
+          <small>Web Push Notifications</small>
+          <small>Smart Pop-ups</small>
+        </div>
+        <div class="col-6 col-sm-3 col-md-3 d-grid">
+          <p class="fs-5 fw-bolder">RESOURCES</p>
+          <small>SendPulse Academy</small>
+          <small>Knowledge Base</small>
+          <small>Internet Marketing 101</small>
+          <small>Blog</small>
+          <small>Integrations</small>
+          <small>API</small>
+          <small>Expert directory</small>
+          <small>Partner Program</small>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-7">
+          <p class="mt-5 privacy">
+            <a href="#">Terms of Service</a>
+            <a class="mx-5" href="#"> Privacy Policy</a>
+            <a href="#">Cookie Statement</a>
+            <a class="mx-5 my-2" href="#">SendPulse Security</a>
+            <a href="#">Data Processing Agreement</a>
+          </p>
+          <small class="text-secondary"
+            >Copyright © 2015 - 2023. SendPulse. All rights reserved</small
+          >
+        </div>
+        <div class="col-12 col-sm-5 mt-5">
+          <button class="bttn bg-primary text-light fs-5 border-0">
+            <i class="fa-brands fa-facebook"></i>
+          </button>
+          <button class="bttn bg-info text-light mx-2 border-0">
+            <i class="fa-brands fs-5 fa-twitter"></i>
+          </button>
+          <button class="bttn insta">
+            <i class="fa-brands fa-instagram"></i>
+          </button>
+          <button class="bttn bg-danger mx-2 fs-5 text-light border-0">
+            <i class="fa-brands fa-youtube"></i>
+          </button>
+          <button class="bttn bg-primary text-light fs-5 border-0">
+            <i class="fa-brands fa-linkedin"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://kit.fontawesome.com/7fe2d1a9ce.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
+<script>
+  let getpost = JSON.parse(localStorage.getItem("post"));
+  let dropleft = document.querySelector(".dropleft");
+  
+  // let imageposted = JSON.parse(localStorage.getItem("image"))
+  let more = document.getElementById("more")
+  more.addEventListener("click", function () {
+    
+    if ( document.querySelector(".dropleft").style.display === "block") {
+      document.querySelector(".dropleft").style.display = "none"
+
+    }else{
+      document.querySelector(".dropleft").style.display = "block"
+    }
+  })
+  for (let index = 0; index < getpost.length; index++) {
+    const element = getpost[index];
+    let imageposted = localStorage.getItem("image");
+    let likedpost = JSON.parse(localStorage.getItem("posts"))
+    document.getElementById("showscreen").innerHTML += `
+    <div class="w-75 mx-auto shadow my-5 row rounded-2 d-flex align-items-center border p-3  postcon ">
+     <div class="col-12 col-sm-8">
+      <div id="textcontents${index}" class="text d-grid text-start w-100">
+        <h1  class="fs-1 fw-bolder title w-100">${element.header}</h1> 
+        <p class="subtitle postcontent fs-5 text-secondary">${element.opening}</p>
+        <p class="postcontent text-secondary">${element.postcontent}</p>
+        <div> 
+      <div class="d-flex align-items-center"> 
+        <button onclick=likepost(${index}) id="likebtn${index}" class="likebtn" title="like"><i class="fa-solid fa-heart"></i> </button>
+     <div class="comdiv   w-fit-content">
+      <button title="comment" onclick="commentmessg(${index})" id="commment${index}" class="commentbtn" title="comment"><i class="fa-solid fa-comment"></i></button>
+      <small id="notice" class="notice border rounded-circle w-fit-content shadow "></small>
+      </div>
+       <div class="mx-3 commentsection" id="commentsection${index}">
+        <div  class="d-flex align-items-center">
+          <textarea class="commentarea" name="comment" id="commentinp(${index})" cols="30" rows="1"></textarea>
+          <button onclick = "postcomment(${index})"  class="btn btn-primary send text-light"><i class="fa-regular fa-paper-plane"></i></button>
+        </div>  
+      </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      
+
+      <div class="image-div col-12 col-sm-4"><img class="img-fluid" id="imagepreview" src="${element.imageposted}"></div>
+      <button onclick="deletepost(${index})" title="delete post"  class="deletbtn"><span  class="material-symbols-outlined">
+delete
+</span></button>
+<button onclick="editpost(${index})" title="Edit post"  class="edit"><span class="material-symbols-outlined">
+    edit
+</span></button>
+    </div>
+  `;
+    if (likedpost && likedpost[index] && likedpost[index].likes) {
+      document.getElementById(`likebtn${index}`).style.color = "red"
+    } else {
+      document.getElementById(`likebtn${index}`).style.color = "rgb(103, 96, 96)"
+    }
+
+  }
+  document.getElementById("postblog").addEventListener("click", function(){
+    window.location.href = "posting.html"
+  })
+  function likepost(index) {
+    const likeButton = document.getElementById(`likebtn${index}`);
+    let likedpost = JSON.parse(localStorage.getItem("posts")) || [];
+    if (likeButton.style.color === "red") {
+      // Unlike the post
+      getpost[index].likes -= 1;
+      likeButton.title = "like";
+      likeButton.style.color = "rgb(103, 96, 96)";
+      // Remove the like status from the local storage
+      if (likedpost[index]) {
+        likedpost.splice(index, 1);
+        localStorage.setItem("posts", JSON.stringify(likedpost));
+      }
+    } else {
+      // Like the post
+      getpost[index].likes += 1;
+      likeButton.title = "unlike";
+      likeButton.style.color = "red";
+      // Add the like status to the local storage
+      likedpost[index] = { likes: 1 };
+      localStorage.setItem("posts", JSON.stringify(likedpost));
+      console.log(likedpost);
+    }
+  }
+
+  function commentmessg(index) {
+    console.log(index);
+    const commentBtn = document.getElementById(`commment${index}`);
+    const commentsec = document.getElementById(`commentsection${index}`);
+    document.getElementById(`commentsection${index}`).style.display = "block"
+    commentBtn.style.display = "none"
+  }
+  let index = 0;
+  let commentArray = JSON.parse(localStorage.getItem("comments"));
+  if (commentArray == null) {
+    commentArray = []
+  }
+
+  function postcomment(index) {
+    let commentpost = document.getElementById(`commentinp(${index})`);
+    if (commentpost.value !== "") {
+      commentArray.push(commentpost.value);
+      console.log(commentArray);
+      const commentBtn = document.getElementById(`commment${index}`);
+      const commentsec = document.getElementById(`commentsection${index}`);
+      document.getElementById(`commentsection${index}`).style.display = "none"
+      commentpost.value = ""
+      commentBtn.style.display = "block"
+      localStorage.setItem("comments", JSON.stringify(commentArray))
+    } else {
+      alert("post a comment")
+      return;
+    }
+    console.log(commentArray);
+  }
+  function deletepost(index) {
+    getpost.splice(index, 1);
+    localStorage.removeItem(`${getpost[index]}`)
+    document.getElementById("showscreen").innerHTML = ""
+    for (let index = 0; index < getpost.length; index++) {
+      const element = getpost[index];
+      let imageposted = localStorage.getItem("image");
+      let likedpost = JSON.parse(localStorage.getItem("posts"))
+      document.getElementById("showscreen").innerHTML += `
+      <div class="w-75 mx-auto shadow my-5 row rounded-2 d-flex align-items-center border p-3  postcon ">
+     <div class="col-12 col-sm-8">
+      <div id="textcontents${index}" class="text d-grid text-start w-100">
+        <h1  class="fs-1 fw-bolder title w-100">${element.header}</h1> 
+        <h6 class="subtitle fs-5 text-secondary">${element.subtiitle}</h6>
+        <p class="subtitle  fs-5 text-secondary">${element.opening}</p>
+        <p class="postcontent text-secondary">${element.postcontent}</p>
+        <div> 
+      <div class="d-flex align-items-center"> 
+        <button onclick=likepost(${index}) id="likebtn${index}" class="likebtn" title="like"><i class="fa-solid fa-heart"></i> </button>
+     <div class="comdiv   w-fit-content">
+      <button title="comment" onclick="commentmessg(${index})" id="commment${index}" class="commentbtn" title="comment"><i class="fa-solid fa-comment"></i></button>
+      <small id="notice" class="notice border rounded-circle w-fit-content shadow "></small>
+      </div>
+       <div class="mx-3 commentsection" id="commentsection${index}">
+        <div  class="d-flex align-items-center">
+          <textarea class="commentarea" name="comment" id="commentinp" cols="30" rows="1"></textarea>
+          <button onclick = "postcomment(${index})"  class="btn btn-primary send text-light"><i class="fa-regular fa-paper-plane"></i></button>
+        </div>  
+      </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      
+
+      <div class="image-div"><img class="img-fluid" id="imagepreview" src="${element.imageposted}"></div>
+      <button onclick="deletepost(${index})" title="delete post"  class="deletbtn"><span  class="material-symbols-outlined">
+delete
+</span></button>
+      <button onclick="editpost(${index})" title="Edit post"  class="edit"><span class="material-symbols-outlined">
+    edit
+</span></button>
+    </div>
+  `;
+      if (likedpost && likedpost[index] && likedpost[index].likes) {
+        document.getElementById(`likebtn${index}`).style.color = "red"
+      } else {
+        document.getElementById(`likebtn${index}`).style.color = "rgb(103, 96, 96)"
+      }
+
+    }
+    localStorage.setItem("post", JSON.stringify(getpost)); // update localStorage
+  }
+  function editpost(index) {
+    const contentToEdit = document.getElementById(`textcontents${index}`);
+    const postContent = contentToEdit.querySelector('.postcontent');
+    postContent.contentEditable = "true";
+    postContent.focus();
+    localStorage.setItem("post", JSON.stringify(getpost));
+  }
+
+</script>

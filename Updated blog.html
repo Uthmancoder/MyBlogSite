@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link rel="stylesheet" href="../icofont/icofont.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+  <style>
+    body {
+      width: 100%;
+      overflow-x: hidden;
+      background-color: aliceblue;
+    }
+    .secti {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    nav {
+      position: relative;
+    }
+    .open {
+      display: none;
+    }
+    .show {
+      display: none;
+    }
+    #eyes {
+      display: none;
+    }
+    .morevert {
+      display: none;
+      color: white;
+      font-size: 50px;
+    }
+    .more {
+      display: none;
+      color: white;
+      font-size: 50px;
+    }
+    .texxd {
+      width: 50%;
+    }
+    .blog {
+      text-align: left;
+    }
+    @media (max-width: 900px) {
+      .morevert {
+        display: block;
+        position: absolute;
+        right: 6%;
+        top: -10px;
+      }
+      .more {
+        display: block;
+        position: absolute;
+        right: 6%;
+        top: 0;
+      }
+      .main {
+        height: 60vh;
+      }
+      #nav2 {
+        display: none;
+      }
+      .texxd {
+        width: 100%;
+        font-size: small;
+      }
+      .blog {
+        width: 90%;
+      }
+      #secproducts {
+        visibility: hidden;
+      }
+      body {
+        overflow-x: hidden;
+      }
+    }
+    .supports {
+      position: relative;
+    }
+    .blog {
+      text-align: left;
+    }
+    .form-box {
+    width: 50%;
+    }
+
+    @media (max-width: 576px) {
+      .form-box {
+        width: 85%;
+      }
+    }
+
+    @media  (max-width: 992px) {
+      /* Medium screens */
+      .form-box {
+        width: 85%;
+      }
+    }
+  </style>
+
+  <body>
+    <main class="main">
+        <nav id="nav" class="bg-dark w-100 d-flex">
+          <div class="container-fluid">
+            <div class="row d-flex align-items-center p-3">
+              <h2 class="fs-2 fw-bolder col-12 col-md-3 black" id="black">
+                Uthman's<span class="text-danger">blog</span>
+              </h2>
+      
+              <div class="col-7 col-md-9 d-flex align-items-center justify-content-end mt-2">
+                <a href="#products" class="fs-5 fw-bolder pp black" id="products-link">Products</a>
+                <a href="#write" class="fs-5 fw-bolder pp mx-4 black" id="prices-link">Prices</a>
+                <a href="#supports" class="fs-5 fw-bolder pp black" id="supports-link">Supports</a>
+                <a href="#promote" class="fs-5 fw-bolder pp black mx-4" id="resources-link">Resources</a>
+                <select class="select" name="lang" id="lang">
+                  <option value="English">
+                    <i class="fa-regular fa-globe"></i> English
+                  </option>
+                  <option value="Portuguese">Portuguese</option>
+                  <option value="Español">Español</option>
+                </select>
+                <button onclick="loguser()" class="btn btn-secondary mx-3">Login</button>
+                <button onclick="signup()" class="btn btn-danger">Sign Up</button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button class="fw-bolder morevert">
+              <span class="material-symbols-outlined reorder"> reorder </span>
+            </button>
+          </div>
+        </nav>
+      
+        <div>
+          <h1 id="h1" class="text-light fw-bolder mx-auto text-center h1">
+            Dream big and never give up
+          </h1>
+        </div>
+      </main>
+      
+
+    <section>
+      <div id="modal">
+        <div class="form-box  mx-auto">
+          <form class="form">
+            <span class="title">Sign up</span>
+            <button onclick="cancelmodal()" class="cancel">&times;</button>
+            <span class="subtitle">Create a free account with your email.</span>
+            <div class="form-container">
+              <input
+                type="text"
+                class="input"
+                placeholder="Full Name"
+                required
+              />
+              <input
+                id="email"
+                type="email"
+                class="input"
+                placeholder="Email"
+                required
+              />
+              <div class="d-flex align-items-center">
+                <input
+                  id="password"
+                  type="password"
+                  class="input"
+                  placeholder="Password"
+                  required
+                />
+                <button
+                  onclick="secPasswordVisibility(event)"
+                  id="eyes"
+                  class="mx-2"
+                >
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <button
+                  id="eyeslahs"
+                  onclick="sectextVisibility(event)"
+                  class="mx-2"
+                >
+                  <i class="fa-solid fa-eye-slash"></i>
+                </button>
+              </div>
+            </div>
+            <button onclick="signuser(event)" class="button">Sign up</button>
+          </form>
+          <div class="form-section">
+            <p>
+              Have an account?
+              <a id="login" onclick="loginimd(event)" href="">Log in</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="modal2">
+        <div class="form-box">
+          <form class="form w-100 w-sm-75 w-md-75 w-lg-50 mx-auto">
+            <span class="title">Log In</span>
+            <button onclick="cancelmodal2()" class="cancel">&times;</button>
+            <span class="subtitle">Log in to your account</span>
+            <div class="form-container">
+              <input
+                id="logemail"
+                type="email"
+                class="input"
+                placeholder="Email"
+                required
+              />
+              <div class="d-flex align-items-center">
+                <input
+                  id="logpassword"
+                  type="password"
+                  class="input"
+                  placeholder="Password"
+                  required
+                />
+                <button onclick="PasswordVisibility(event)" class="close">
+                  <i class="fa-regular fa-eye-slash"></i>
+                </button>
+                <button onclick="textVisibility(event)" class="open">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <button onclick="login(event)" class="button">Log In</button>
+          </form>
+        </div>
+      </div>
+
+      <section class="secti">
+        <nav class="bg-dark secnav" id="nav2">
+          <div class="container-fluid">
+            <div class="row d-flex align-items-center p-3">
+              <h2 class="fs-2 fw-bolder col-3 black" id="black">
+                Uthman's<span class="text-danger">blog</span>
+              </h2>
+
+              <div
+                id="secproducts"
+                class="col-5 d-flex align-items-center mt-2"
+              >
+                <a
+                  href="#products"
+                  class="fs-5 fw-bolder pp black"
+                  id="products-link"
+                  >Products</a
+                >
+                <a
+                  href="#write"
+                  class="fs-5 fw-bolder pp mx-4 black"
+                  id="prices-link"
+                  >Prices</a
+                >
+                <a
+                  href="#supports"
+                  class="fs-5 fw-bolder pp black"
+                  id="supports-link"
+                  >Supports</a
+                >
+                <a
+                  href="#promote"
+                  class="fs-5 fw-bolder pp black mx-4"
+                  id="resources-link"
+                  >Resources</a
+                >
+              </div>
+              <div id="secproducts" class="col-4 d-flex align-items-center">
+                <select class="select" name="lang" id="lang">
+                  <!-- <option value="English">English</option> -->
+                  <option value="English">
+                    <i class="fa-regular fa-globe"></i> English
+                  </option>
+                  <option value="Portugese">Portugese</option>
+                  <option value="Espanol">Espanol</option>
+                </select>
+
+                <button onclick="loguser()" class="btn btn-secondary mx-3">
+                  Login
+                </button>
+
+                <button onclick="signup()" class="btn btn-danger">
+                  Sign Up
+                </button>
+              </div>
+            </div>
+            <div>
+              <button class="fw-bolder more">
+                <span class="material-symbols-outlined reorder"> reorder </span>
+              </button>
+            </div>
+          </div>
+        </nav>
+        <p class="blog mx-auto text-secondary my-5">
+          Blogging is the process that implies creating articles, photos, and
+          other forms of content and publishing them on a website. Its
+          characteristics include informal language, a laid-back atmosphere,
+          regular updates, lifehacks, tips, and a high level of customer
+          engagement.
+        </p>
+        <div class="border blog p-4 rounded-2 mx-auto my-3">
+          <p>
+            <a class="text-dark dak" href="#pros"
+              >1. Pros and Cons of Blogging</a
+            >
+          </p>
+          <p>
+            <a class="text-dark dak" href="#how">2. How does blogging work?</a>
+          </p>
+          <p>
+            <a class="text-dark dak" href="#steps"
+              >3. 6 Steps to Start a Blog</a
+            >
+          </p>
+          <p>
+            <a class="text-dark dak" href="#makemoney"
+              >4. How to Make Money Blogging</a
+            >
+          </p>
+          <p>
+            <a class="text-dark dak" href="#promote"
+              >5. How to Promote a Blog</a
+            >
+          </p>
+          <p>
+            <a class="text-dark dak" href="#best"
+              >6. The Best Free Blogging Platforms</a
+            >
+          </p>
+        </div>
+
+        <p class="blog mx-auto text-secondary my-5">
+          In this article, we’ll explain the advantages and disadvantages of
+          blogging, find out how it works, and uncover some steps to start your
+          blog. We’ll also talk about how to make money on that, promote your
+          blog, and review some free platforms to create it.
+        </p>
+        <div id="pros" class="my-5">
+          <h1 class="fs-2 blog mx-auto text-dark fw-bolder">
+            Pros and Cons of Blogging
+          </h1>
+          <p class="blog mx-auto text-secondary my-5">
+            Nowadays, when the number of blogs reaches 600 million, there’s
+            evidence that this type of business brings good profits. People
+            start their blogs for personal use, business, brand visibility, or
+            high ranks on Google. Let’s now discuss all the advantages of having
+            a blog in more detail.
+          </p>
+
+          <p class="blog mx-auto text-secondary my-5">
+            The pros of blogging are as follows:
+          </p>
+          <ul>
+            <li class="blog mx-auto text-secondary my-5">
+              <p>
+                <span class="text-dark fw-bold">Ranking optimization</span>.
+                Creating useful and informative blog posts allows you to get a
+                higher ranking. With evergreen articles, your website will rank
+                better on Google and ultimately drive organic traffic. To ensure
+                improvements in terms of your site’s performance, don’t forget
+                to update your content regularly.
+              </p>
+            </li>
+            <li class="blog mx-auto text-secondary my-5">
+              <p>
+                <span class="text-dark fw-bold"
+                  >Good relationships and communication with your
+                  audience.</span
+                >Customer engagement is crucial when it comes to your brand
+                promotion and sales. That’s why it’s imperative to connect with
+                your audience. Starting a blog is the best way to do it since
+                you can let your readers explore your relevant content, leave
+                feedback, and rate your material. It also enables you to update
+                customers on your company’s latest products, launches, and news.
+              </p>
+            </li>
+            <li class="blog mx-auto text-secondary my-5">
+              <p>
+                <span class="text-dark fw-bold">Additional revenue</span
+                >.Successful blogs make significant profits. You can generate
+                more income not only from selling products but also from
+                blogging itself. If you have a reliable and popular website,
+                your revenue can come from traffic, affiliate links, sponsored
+                content, ebooks, webinars, courses, training, etc.
+              </p>
+            </li>
+            <li class="blog mx-auto text-secondary my-5">
+              <p>
+                <span class="text-dark fw-bold">Extra exposure</span>.If you aim
+                to create buzz around your company and product, making content
+                related to your industry is the best decision. Leads can come
+                from different sources to find info about certain industries.
+                This way, your website will obtain more visitors and drive
+                traffic.
+              </p>
+            </li>
+            <li class="blog mx-auto text-secondary my-5">
+              <p>
+                <span class="text-dark fw-bold">Online visibility. </span>.As of
+                2021, 4.72 billion people use online networks. In one way or
+                another, all these users use the internet to find answers to
+                their questions, learn something new, or just fill in their free
+                time. By creating interesting blog posts, you can draw users’
+                attention to your brand and establish brand recognition. A
+                visible website enables you to generate new customers faster.
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        <div id="how">
+          <h1 class="fs-2 blog mx-auto text-dark fw-bolder">
+            How does blogging work?
+          </h1>
+          <p class="blog mx-auto text-secondary my-5">
+            People who begin their startups buy a domain name and design their
+            websites by themselves, while established businesses create new
+            landing pages for a blog on their existing websites to fill them
+            with good content. With simple websites, blogs enable visitors to
+            use them easily and find the necessary information.
+          </p>
+          <p class="blog mx-auto text-secondary my-5">
+            Different bloggers choose different blog themes. Some prefer to talk
+            about marketing and product reviews, and others discuss fashion,
+            healthy life, cooking, or any other topic. Bloggers create a series
+            of posts and make them available for reading on their websites.
+            Articles usually appear in a certain order, starting from the most
+            recent ones. They are also divided into categories to enable people
+            to navigate them easily. Besides, blog posts have another unique
+            feature, such as interlinking. This way, bloggers link to other
+            blogs and promote each other to expand their audiences. <br />
+            If you are interested in starting your own blog from the very
+            beginning, let’s explore some steps you need to take to get started.
+          </p>
+
+          <div
+            class="border blog p-4 rounded-2 text-start mx-auto my-3 bg-secondary"
+          >
+            <h1 class="w-100 bg-light fs-1 fw-bold p-2">
+              6 Steps to Start a Blog
+            </h1>
+            <div class="blog rounded-2 my-3">
+              <p>
+                <a class="text-light dak" href="#niche">1. Choose a niche</a>
+              </p>
+              <p>
+                <a class="text-light dak" href="#catchy"
+                  >2. Pick a catchy and easy name for your blog</a
+                >
+              </p>
+              <p>
+                <a class="text-light dak" href="#select"
+                  >3. Select a unique design</a
+                >
+              </p>
+              <p>
+                <a class="text-light dak" href="#write"
+                  >4. Write your first blog post</a
+                >
+              </p>
+              <p>
+                <a class="text-light dak" href="#promoteblog"
+                  >5. Promote your blog through different platforms</a
+                >
+              </p>
+              <p>
+                <a class="text-light dak" href="#optimize"
+                  >6. Optimize and update your content</a
+                >
+              </p>
+            </div>
+          </div>
+          <p class="blog mx-auto text-secondary my-5">
+            With basic computer knowledge and an understanding of what your
+            heart desires, you can easily create a blog by sticking to our
+            guide.
+          </p>
+          <p id="niche" class="blog mx-auto text-secondary my-5">
+            <span class="text-dark fw-bold">Choose a niche</span>. Firstly, you
+            need to select a niche in which you have a high level of expertise.
+            Your passion and interest in the chosen industry are essential.
+            Secondly, once you choose your key topic, make sure that it has a
+            wide audience so that you have some space to grow your blog. If you
+            don’t have any idea what to blog about, consider sharing your life
+            experiences. You can start a personal blog and tell about your daily
+            routine: makeup and cosmetics, style and clothes, traveling, or
+            anything else. The key is to create quality content that will
+            attract the public.
+          </p>
+          <p id="catchy" class="blog mx-auto text-secondary my-5">
+            <span class="text-dark fw-bold"
+              >Pick a catchy and easy name for your blog</span
+            >To make readers recognize your blog, you need to select an
+            easy-to-remember domain name. It’s your address on the internet, so
+            it should be unique. Your domain name will enable people to find
+            your website or social media account easily. Your title should be
+            descriptive so that new users can catch the main idea of your blog.
+          </p>
+          <p id="select" class="blog mx-auto text-secondary my-5">
+            <span class="text-dark fw-bold">Select a unique design.</span>You
+            need to have some understanding of your blog and its design since it
+            needs a face. As an option, you can consider leveraging WordPress
+            since it has special layouts for blogs. The platform enables you to
+            obtain a layout and its design just in a few clicks.
+          </p>
+          <p id="write" class="blog mx-auto text-secondary my-5">
+            <span class="text-dark fw-bold">Write your first blog post</span>.
+            Once you decide on your design, it’s time to create your first piece
+            of content. Bear in mind that to blog successfully, you need to
+            create unique, engaging, informative, interesting, and relatively
+            long posts. It’s not an easy task to always come up with fresh and
+            interesting ideas, but they help attract people, engage them, and
+            make them loyal to your brand. Besides, don’t forget to add some
+            photos to create visually appealing blog posts and simplify the way
+            visitors perceive your content.
+          </p>
+          <p id="promoteblog" class="blog mx-auto text-secondary my-5">
+            <span class="text-dark fw-bold"
+              >Promote your blog through different platforms.</span
+            >Now when companies and bloggers promote products with the help of
+            digital and traditional marketing, you can’t remain inactive. Use
+            various forms of ads like PPC, native advertising, pre-roll ads,
+            create email campaigns, and leverage social media channels to
+            popularize your blog. More and more bloggers use paid ads that
+            appear on users’ Instagram Stories and feed. Consider collaborating
+            with other bloggers in your niche, commenting on other famous pages,
+            communicating with your audience, and posting regularly to build a
+            follower base and gain your readers’ love and trust.
+          </p>
+          <p id="optimize" class="blog mx-auto text-secondary my-5">
+            <span class="text-dark fw-bold"
+              >Optimize and update your content.</span
+            >Once your blog post is published, remember to update it frequently.
+            If you want your blog to rank higher on Google, utilize relevant
+            keywords, write quality content, add SEO meta tags, optimize images,
+            and reduce your bounce rate.
+          </p>
+        </div>
+
+        <p class="blog mx-auto text-secondary my-5">
+          Now that you’ve already explored our guide on developing a blog, let’s
+          jump into the next section to figure out the ways to gain revenue from
+          your blog.
+        </p>
+
+        <div id="supports">
+          <div class="border blog p-4 rounded-2 mx-auto my-3 bg-secondary">
+            <h1 class="w-100 bg-light fs-1 fw-bold p-2">
+              How to Make Money Blogging
+            </h1>
+            <div class="blog rounded-2 lefty my-3">
+              <p>
+                <a class="text-light dak" href="#conduct"
+                  >1. Conduct courses and workshops</a
+                >
+              </p>
+              <p>
+                <a class="text-light dak" href="#create"
+                  >2. Create sponsored posts</a
+                >
+              </p>
+              <p>
+                <a class="text-light dak" href="#host"
+                  >3.Host a paid webinar or training</a
+                >
+              </p>
+              <p>
+                <a class="text-light dak" href="#consider"
+                  >4. Consider affiliate marketing</a
+                >
+              </p>
+              <p><a class="text-light dak" href="#book">5. Write bookss</a></p>
+            </div>
+          </div>
+          <p class="blog mx-auto text-secondary my-5">
+            The popularity of your blog provides you with new opportunities to
+            make money. You can see several effective ways to earn some extra
+            costs below.
+          </p>
+          <h1 id="conduct" class="fs-2 blog mx-auto text-dark fw-bolder">
+            Conduct courses and workshops
+          </h1>
+          <p class="blog mx-auto text-secondary my-5">
+            One of the greatest ways to make money online is to create courses.
+            Modern people look for new skills and knowledge that help their
+            personal and career growth. However, due to their often heavy
+            workload, they don’t have a lot of time. That’s why it’s always a
+            problem to go somewhere to directly participate in different events.
+          </p>
+          <p class="blog mx-auto text-secondary my-3">
+            <span class="text-dark fw-bold">Online courses </span> and workshops
+            come to the rescue and help both participants and bloggers. As a
+            blogger, you can connect with your audience through different video
+            platforms and share a topic you specialize in, and your participants
+            can obtain the necessary knowledge.
+          </p>
+          <p class="blog mx-auto text-secondary my-5">
+            Let’s take Gabrielle Bernstein, for example. The spiritual leader
+            offers readers to buy her courses on relationships, business, and
+            meditation. She earns money by sharing her experience and valuable
+            hands-on tips.
+          </p>
+        </div>
+
+        <div id="products">
+          <h1 id="conduct" class="fs-2 blog mx-auto text-dark fw-bolder">
+            Products and services
+          </h1>
+          <img
+            class="blog img text-center img-fluid h-100"
+            src="https://www.spcdn.org/images/blogging-gabby-bernstein.png"
+            alt=""
+          />
+
+          <div id="create">
+            <h1 id="conduct" class="fs-2 blog mx-auto text-dark fw-bolder">
+              Conduct courses and workshops
+            </h1>
+            <p class="blog mx-auto text-secondary my-5">
+              Bloggers often write sponsored posts on social media platforms or
+              their websites to get paid by different brands. They help draw
+              followers’ attention to a brand or individual promoted. Opinion
+              leaders create blog posts, videos, or Instagram Stories to bring
+              new customers to a company.
+            </p>
+            <p class="blog mx-auto text-secondary my-3">
+              For example, let’s take Madelaine Petsch and Bliss. In the
+              Instagram post below, the actress promotes the brand’s sunscreen.
+            </p>
+            <img
+              class="blog img text-center img-fluid h-100"
+              src="https://www.spcdn.org/images/blogging-madelame.png"
+              alt=""
+            />
+
+            <h1 id="conduct" class="fs-2 blog mx-auto text-dark fw-bolder">
+              Host a paid webinar or training
+            </h1>
+            <p class="blog mx-auto text-secondary my-5">
+              A lot of companies and individuals start with free webinars.
+              However, if you are an expert in your industry, you can make money
+              on your expertise by organizing paid training or webinars. To run
+              webinars smoothly, pay attention to details and check your info
+              for accuracy. Small errors and typos are unacceptable. Remember to
+              make your training special and unique so that it can be useful and
+              fresh for participants. If it shows good results, consider making
+              a series.
+            </p>
+            <p class="blog mx-auto text-secondary my-3">
+              For example, Jack Kornfield, an author and Buddist practitioner,
+              conducts a seven-week online training about the power of
+              awareness.
+            </p>
+
+            <img
+              class="blog img text-center img-fluid h-100"
+              src="https://www.spcdn.org/images/blogging-jack-kornfield.png"
+              alt=""
+            />
+            <h1 id="conduct" class="fs-2 blog mx-auto text-dark fw-bolder">
+              Consider affiliate marketing
+            </h1>
+            <p class="blog mx-auto text-secondary my-5">
+              One more secondary source of income is affiliate marketing. By
+              recommending digital products, services, and other products of
+              other companies on your blog, you can earn a good commission. This
+              way, you get paid every time you promote a company.
+            </p>
+          </div>
+        </div>
+
+        <div id="write">
+          <h1 id="conduct" class="fs-2 blog mx-auto text-dark fw-bolder">
+            Write books
+          </h1>
+          <p class="blog mx-auto text-secondary my-5">
+            Bloggers can get some additional income not only from recommending
+            and promoting other companies but also from writing and selling
+            their own books or ebooks to their audience. By reading books,
+            people can sharpen their knowledge in various industries: marketing,
+            psychology, design, sales, beauty, etc. As an expert, you can
+            communicate your knowledge by creating something unique and fresh.
+            Your readers will appreciate that.
+          </p>
+          <p class="blog mx-auto text-secondary my-5">
+            For example, Becca Ludlum, who has a website and an Instagram page
+            dedicated to nutrition and healthy eating habits, also wrote a new
+            book called “Meal Prep in an Instant.”
+          </p>
+
+          <img
+            class="blog img text-center img-fluid h-100"
+            src="https://www.spcdn.org/images/blogging-becca-ludlum.png"
+            alt=""
+          />
+          <p class="blog mx-auto text-secondary">
+            Now that you know how to monetize your blog, let’s look at several
+            ways to promote and popularize it.
+          </p>
+        </div>
+
+        <div id="promote">
+          <h1 id="conduct" class="fs-2 blog mx-auto text-dark fw-bolder my-3">
+            The Best Free Blogging Platforms
+          </h1>
+          <p class="blog mx-auto text-secondary my-2">
+            You can encounter many platforms that help create wonderful blogs
+            with high engagement. We’ve prepared the most effective and
+            convenient ones that offer a free plan.
+          </p>
+          <h1 id="conduct" class="fs-2 blog mx-auto text-dark fw-bolder my-3">
+            WordPress.com
+          </h1>
+          <p class="blog mx-auto text-secondary my-2">
+            WordPress makes the creation of blogs easier and enables both
+            beginners and professionals to create engaging blogs with modern
+            design. The platform offers responsive themes, website statistics,
+            built-in SEO, social media integration, and sharing features. With
+            WordPress, bloggers don’t need to worry about complying with
+            clients’ demands. The service helps create a modern site and
+            customize it with content, features, and branding.
+          </p>
+          <p class="blog mx-auto text-secondary my-2">
+            The platform provides its users with hundreds of design options,
+            color schemes, and advanced design tools, so your blog will
+            definitely satisfy your future readers. Besides, it offers secure
+            hosting, custom CSS, and 24/7 support.
+          </p>
+          <img
+            class="blog img text-center img-fluid h-100"
+            src="https://www.spcdn.org/images/blogging-platforms-wordpress.png"
+            alt=""
+          />
+        </div>
+
+        <div class="try">
+          <h1 class="text-light fs-1 fw-bolder text-center my-5">
+            Try SendPulse today for free
+          </h1>
+          <p class="blog mx-auto text-light fs-5 fw-bolder my-5">
+            If you are interested in blogging, you might be interested in our
+            promotional tools
+          </p>
+          <button id="siguser" class="btn btn-danger py-1 px-3 fs-5 mx-auto">
+            Sign Up
+          </button>
+        </div>
+      </section>
+    </section>
+
+    <footer>
+      <div class="container my-5">
+        <div class="row">
+          <div class="col-3 d-grid">
+            <p class="fs-5 fw-bolder">EMAIL</p>
+            <small>Email Caeigns</small>
+            <small>Transactional Emails</small>
+            <small>Drag and Drop Editor</small>
+            <small>Subscrition Forms</small>
+            <small>Automation</small>
+            <small>Camsmallaign Analytics</small>
+            <small>Free Email Temlates</small>
+            <small>Free Chrome Extension</small>
+          </div>
+          <div class="col-3 d-grid">
+            <p class="fs-5 fw-bolder">CHATBOTS</p>
+            <small>Chatbot Builder</small>
+            <small>Instagram Chatbots</small>
+            <small>WhatsApp Chatbots</small>
+            <small>WhatsApp Business API </small>
+            <small>Viber Chatbots</small>
+            <small>Facebook Chatbots</small>
+            <small>Telegram Chatbots</small>
+            <small>Chatbot Signup Widgets</small>
+          </div>
+          <div class="col-3 d-grid">
+            <p class="fs-5 fw-bolder">CHATBOTS</p>
+            <small>Course Creator</small>
+            <small>CRM</small>
+            <small>Landing Pages</small>
+            <small>Bio Link Page</small>
+            <small>SMS</small>
+            <small>Viber</small>
+            <small>Web Push Notifications</small>
+            <small>Smart Pop-ups</small>
+          </div>
+          <div class="col-3 d-grid">
+            <p class="fs-5 fw-bolder">RESOURCES</p>
+            <small>SendPulse Academy</small>
+            <small>Knowledge Base</small>
+            <small>Internet Marketing 101</small>
+            <small>Blog</small>
+            <small>Integrations</small>
+            <small>API</small>
+            <small>Expert directory</small>
+            <small>Partner Program</small>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="container">
+        <div class="row">
+          <div class="col-7">
+            <p class="mt-5 privacy">
+              <a href="#">Terms of Service</a>
+              <a class="mx-5" href="#"> Privacy Policy</a>
+              <a href="#">Cookie Statement</a>
+              <a class="mx-5 my-2" href="#">SendPulse Security</a>
+              <a href="#">Data Processing Agreement</a>
+            </p>
+            <small class="text-secondary"
+              >Copyright © 2015 - 2023. SendPulse. All rights reserved</small
+            >
+          </div>
+          <div class="col-5 mt-5">
+            <button class="bttn bg-primary text-light fs-5 border-0">
+              <i class="fa-brands fa-facebook"></i>
+            </button>
+            <button class="bttn bg-info text-light mx-2 border-0">
+              <i class="fa-brands fs-5 fa-twitter"></i>
+            </button>
+            <button class="bttn insta">
+              <i class="fa-brands fa-instagram"></i>
+            </button>
+            <button class="bttn bg-danger mx-2 fs-5 text-light border-0">
+              <i class="fa-brands fa-youtube"></i>
+            </button>
+            <button class="bttn bg-primary text-light fs-5 border-0">
+              <i class="fa-brands fa-linkedin"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script
+      src="https://kit.fontawesome.com/7fe2d1a9ce.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+<script src="script.js"></script>
